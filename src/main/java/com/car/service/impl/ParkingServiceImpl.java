@@ -92,7 +92,8 @@ public class ParkingServiceImpl implements ParkingService {
 		var parkingAmount =  prices.get(newDetail.getStreetName()).multiply(BigDecimal.valueOf(minutes));
 		
 		String response =  "You have successfully De-Registered your vehicle. Total Time : "+ minutes+""
-				+ " minute. And Total Amont "+parkingAmount+" and Total Cost"+parkingAmount.divide(BigDecimal.valueOf(100));
+				+ " minute. And Total Amont "+parkingAmount.divide(BigDecimal.valueOf(100));
+		// "+parkingAmount+" and Total Cost
 	     return response;
 	
 	}
