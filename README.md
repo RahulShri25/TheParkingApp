@@ -3,20 +3,20 @@
 This application using simple Java / Maven / Spring Boot (version 3.2.2). It can be used to register and de-register the Parking of Vehicle based on there licence number. 
 And also administrator can also upload list of vehicle they monitored with monitoring vehicle.
 
-## Tech Stack used
+## Technology used
 - Java - 17
 - SpringBoot - 3.2.2
 - Maven - 3.9.5
 - Embedded Tomcat 10.x 
 
-## Step to setup
+## Steps To Poject Setup
 
 * Clone this repository - https://github.com/RahulShri25/TheParkingApp.git
 * Make sure you are using JDK 17 and Maven 3.9.x
 * You can build the project and run the tests by running ```mvn clean package
 * Once successfully built, you can run the service by one of these two methods:
 
-
+### API's Listing
 ### Registering vehicle using licence number.
 
 POST /api/registercar
