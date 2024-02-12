@@ -27,7 +27,11 @@ public class ParkingController {
 	private ParkingService parkingService;
 	
 	
-	// To Register new Car/Vehicle using LicenceNumber Unique Value
+	/* To Register new Car/Vehicle using LicenceNumber Unique Value
+	 * @Requetparam  contains LicenceNumber, street_name,arrivalTime,currentStatus
+	 * @response parking details as response.
+	 * @throws AlreadyRegisteredException if user tried to re-register same vehicle.
+	 */
 	@PostMapping("/registercar")
 	public ResponseEntity<ParkingDetail> registerCar(@RequestBody ParkingDetail parkingdetail)
 			throws CarAlreadyExistException
@@ -38,7 +42,14 @@ public class ParkingController {
 	}
 	
 	
-	//To Un-register the Car/Vehicle with calculating the total minutes of parking and cost of parking
+	/*
+	 * To Un-register the Car/Vehicle with calculating the total minutes of parking and cost of parking
+	 *
+	 * @Requetparam details contain LicenceNumber.
+	 * @response provide success message with Parking cost.
+	 * @throws LicenceNotRegistered if Licence not found.
+	 */
+	
 	@PostMapping("/unregistercar")
 	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered	
 	{
@@ -47,7 +58,12 @@ public class ParkingController {
 	}
 	
 	
-	// To add Vehicle Observation List
+	
+	/*
+	 * Load list of vehicle licence number collected during monitoring.
+	 * @response data list of all vehicles licence number along with street name.
+	 * @return return same as response.
+	 */
 	@PostMapping("/addParkingObservdetail")
 	public ResponseEntity<List<ParkingObservDetail>> addParkingObservDetail 
 	(@RequestBody List<ParkingObservDetail> entityList)

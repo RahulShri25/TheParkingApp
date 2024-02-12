@@ -27,9 +27,6 @@ Request
 {
     "licenceNumber": "abc107",
     "streetName": "Java",
-    "arrivalTime": "2024-02-19T14:41:02.68666",
-    "departureTime": null,
-    "currentStatus": "Parked"
 }
 
 RESPONSE: HTTP 201 (Created)

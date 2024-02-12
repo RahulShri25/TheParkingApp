@@ -47,7 +47,9 @@ public class ParkingServiceImpl implements ParkingService {
 
 
 
-	
+	/*
+	 *  To Get The car Register based on License Number and Street Name
+	 */
 	@Override
 	public ParkingDetail registerCar(ParkingDetail parkingdetail)throws CarAlreadyExistException {
 		// TODO Auto-generated method stub
@@ -56,12 +58,15 @@ public class ParkingServiceImpl implements ParkingService {
 		{
 			throw new CarAlreadyExistException("Car is Already Registered");
 		}
-		
+		parkingdetail.setArrivalTime(LocalDateTime.now().withNano(0));
+		parkingdetail.setCurrentStatus(Constant.Car_Registered);
 		return parkingRepo.save(parkingdetail);
 
 	}
 
-
+	/*
+	 *  To Get The car Un-Register based on License Number 
+	 */
 	@Override
 	public String unregisterCar(String licenceNumber) throws LicenceNotRegistered {
 		// TODO Auto-generated method stub
@@ -79,7 +84,9 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 
 
-	
+	/*
+	 *  To Calculate The Parking Cost Based on number of minutes of parking and timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
+	 */
 	private String calculateParkingCost(ParkingDetail parkDetail,Map<String, BigDecimal> prices)
 	{
 		
@@ -99,7 +106,9 @@ public class ParkingServiceImpl implements ParkingService {
 	
 	}
 
-
+	/*
+	 * This is add Parking Monitoring list data into database
+	 */
 	@Override
 	public List<ParkingObservDetail> addParkingObservDetail(List<ParkingObservDetail> entityList) {
 		// TODO Auto-generated method stub
@@ -107,7 +116,9 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 
 
-
+    /*
+     * this is to generate the Report of Un-registered car/vehicles
+     */
 
 	@Override
 	public List<UnRegisterCarReport> getlistUnregisterCar() {

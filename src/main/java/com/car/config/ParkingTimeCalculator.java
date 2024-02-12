@@ -12,7 +12,9 @@ public class ParkingTimeCalculator {
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 	
 	
-	
+	/*
+	 * To Calculate The Parking Cost Based on number of minutes of parking and timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
+	 */
 	public static long calculateParkingMinutes(String startDateTimeString, String endDateTimeString) {
 
 		long minutes = 0;

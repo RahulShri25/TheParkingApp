@@ -2,11 +2,6 @@ package com.car.entity;
 
 import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public class UnRegisterCarReport {
 	
 	private String licenceNumber;

@@ -10,12 +10,15 @@ import com.car.exception.LicenceNotRegistered;
 
 public interface ParkingService {
 
-	
+	// To Register the car/vehicle based on License Number and Street Name
 	public ParkingDetail registerCar(ParkingDetail parkingdetail) throws CarAlreadyExistException;
 	
+	// To Un-Register the car/vehicle based on License Number and Street Name
 	public String unregisterCar(String licenceNumber) throws LicenceNotRegistered;
 	
+	//To Add Car Monitoring List data
 	public List<ParkingObservDetail> addParkingObservDetail(List<ParkingObservDetail> entityList);
 
+	//To Get The Report to unregistered car/vehicle
 	public  List<UnRegisterCarReport> getlistUnregisterCar();
 }
