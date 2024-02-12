@@ -106,11 +106,33 @@ public class ParkingServiceTest {
 		parkd.setCurrentStatus("DeParked");
 		parkd.setDepartureTime(LocalDateTime.now().withNano(0));
 		
+		when(parkingRepo.save(any())).thenReturn(parkd);
+		
 		Mockito.<Optional<ParkingDetail>>when(parkingRepo.findByLicenceNumberAndCurrentStatus(any(), any()))
 		.thenReturn(Optional.of(parkd));
 		when(parkingCostRepo.findAll()).thenReturn(priceDetail);
 		String result = parkingService.unregisterCar("abc102");
 		Assertions.assertEquals(result,"You have successfully De-Registered your vehicle");
+	}
+	
+	
+	@Test
+	void deRegisterParkingDetailsSundayOnly() throws LicenceNotRegistered{
+		
+		ParkingDetail parkd= new ParkingDetail();
+		parkd.setLicenceNumber("abc102");
+		parkd.setStreetName("Java");
+		parkd.setCurrentStatus("DeParked");
+		parkd.setArrivalTime(LocalDateTime.of(2022,02,11,11,35,1));
+		parkd.setDepartureTime(LocalDateTime.of(2022,02,11,11,35,1));
+		
+		when(parkingRepo.save(any())).thenReturn(parkd);
+		
+		Mockito.<Optional<ParkingDetail>>when(parkingRepo.findByLicenceNumberAndCurrentStatus(any(), any()))
+		.thenReturn(Optional.of(parkd));
+		when(parkingCostRepo.findAll()).thenReturn(priceDetail);
+		String result = parkingService.unregisterCar("abc102");
+		Assertions.assertEquals(result,BigDecimal.valueOf(0));
 	}
 	
 	

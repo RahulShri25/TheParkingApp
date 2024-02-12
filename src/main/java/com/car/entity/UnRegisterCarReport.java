@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 
 public class UnRegisterCarReport {
 	
+
 	private String licenceNumber;
 	private String streetName;
-	private LocalDateTime date;
-	
-	public UnRegisterCarReport(String licenceNumber2, String streetName2, LocalDateTime recordingDate) {
-		// TODO Auto-generated constructor stub
+	private LocalDateTime reportingDate;
+
+	public UnRegisterCarReport(String licenceNumber, String streetName, LocalDateTime reportingDate) {
+		super();
+		this.licenceNumber = licenceNumber;
+		this.streetName = streetName;
+		this.reportingDate = reportingDate;
 	}
+	
 	public String getLicenceNumber() {
 		return licenceNumber;
 	}
@@ -23,11 +28,12 @@ public class UnRegisterCarReport {
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}
-	public LocalDateTime getDate() {
-		return date;
+	public LocalDateTime getReportingDate() {
+		return reportingDate;
 	}
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setReportingDate(LocalDateTime reportingDate) {
+		this.reportingDate = reportingDate;
 	}
+
 
 }

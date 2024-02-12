@@ -136,15 +136,16 @@ public class ParkingServiceImpl implements ParkingService {
 
 		observDetails.forEach(item->{
 			if (!parkDetails.stream().map(m -> m.getLicenceNumber()).toList().contains(item.getLicenceNumber())){
-				finalData.addAll((Collection<? extends ParkingObservDetail>) item);
+				finalData.add(item);
 			}
 		});
+
 		
 		finalData.addAll(observDetails.stream()
 				.filter(o -> parkDetails.stream().anyMatch(pd -> o.getLicenceNumber().equals(pd.getLicenceNumber())
 								&& o.getStreetName().equals(pd.getStreetName())
-								&& o.getRecordingDate().isAfter(pd.getDepartureTime())
-								&& o.getRecordingDate().isBefore(pd.getArrivalTime())))
+								&& (o.getRecordingDate().isAfter(pd.getDepartureTime())
+								|| o.getRecordingDate().isBefore(pd.getArrivalTime())   )))
 				.collect(Collectors.toList()));
 		
 		return finalData.stream().map(item->new UnRegisterCarReport(item.getLicenceNumber(),

@@ -26,7 +26,7 @@ Content-Type: application/json
 Request
 {
     "licenceNumber": "abc107",
-    "streetName": "Java",
+    "streetName": "Java"
 }
 
 RESPONSE: HTTP 201 (Created)
