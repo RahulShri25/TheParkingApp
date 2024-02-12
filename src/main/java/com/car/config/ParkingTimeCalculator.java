@@ -11,6 +11,8 @@ public class ParkingTimeCalculator {
 	
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 	
+	
+	
 	public static long calculateParkingMinutes(String startDateTimeString, String endDateTimeString) {
 
 		long minutes = 0;

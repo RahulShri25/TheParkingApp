@@ -25,6 +25,7 @@ import com.car.entity.ParkingObservDetail;
 import com.car.entity.PriceDetail;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
+import com.car.exception.LicenceNotRegistered;
 import com.car.respository.ParkingCostRepository;
 import com.car.respository.ParkingObservationDetail;
 import com.car.respository.ParkingRepository;
@@ -97,7 +98,7 @@ public class ParkingServiceTest {
 	}
 	
 	@Test
-	void unRegisterCar(){
+	void unRegisterCar() throws LicenceNotRegistered{
 		
 		ParkingDetail parkd= new ParkingDetail();
 		parkd.setLicenceNumber("abc102");

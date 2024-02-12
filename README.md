@@ -1,6 +1,6 @@
-# The Parking Application
+# Parking App
 
-This application using simple Java / Maven / Spring Boot (version 3.2.2). It can be used to register and de-register the Parking of Vehicle based on there licence number. 
+This application using simple Java / Maven / Spring Boot (version 3.2.2). It can be used to register and de-register to Parking of Vehicle based on there licence number. 
 And also administrator can also upload list of vehicle they monitored with monitoring vehicle.
 
 ## Technology used
@@ -56,7 +56,7 @@ Request
 
 RESPONSE: HTTP 200 (OK)
 {
-    "message": "You have successfully De-Registered your vehicle. Total Time : 2101 minute.And Total Cost : 315.15"
+    "message": "You have successfully De-Registered your vehicle. Total Time : 2101 minute.And Total Cost : 315.15  in EUR."
 
 }
 

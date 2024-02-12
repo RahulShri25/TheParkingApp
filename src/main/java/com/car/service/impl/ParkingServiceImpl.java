@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,7 @@ import com.car.entity.ParkingObservDetail;
 import com.car.entity.PriceDetail;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
+import com.car.exception.LicenceNotRegistered;
 import com.car.respository.ParkingCostRepository;
 import com.car.respository.ParkingObservationDetail;
 import com.car.respository.ParkingRepository;
@@ -63,12 +63,13 @@ public class ParkingServiceImpl implements ParkingService {
 
 
 	@Override
-	public String unregisterCar(String licenceNumber) {
+	public String unregisterCar(String licenceNumber) throws LicenceNotRegistered {
 		// TODO Auto-generated method stub
 		
 		Optional<ParkingDetail> pd= parkingRepo.findByLicenceNumberAndCurrentStatus(licenceNumber,Constant.Car_Registered);
 		if (pd.isEmpty()) {
-			throw new RuntimeException("Parking registration is not found for licence number :"
+			
+			throw new LicenceNotRegistered("Parking registration is not found for licence number :"
 					+ " "+ licenceNumber +" Or already De-registration");
 		}
 		

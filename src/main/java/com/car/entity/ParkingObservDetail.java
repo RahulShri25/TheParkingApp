@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 
-@Data
+
 @Entity
 @Accessors(chain = true)
 @Table(name = "parking_observation_detail")

@@ -15,6 +15,7 @@ import com.car.entity.ParkingDetail;
 import com.car.entity.ParkingObservDetail;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
+import com.car.exception.LicenceNotRegistered;
 import com.car.service.ParkingService;
 
 
@@ -31,7 +32,6 @@ public class ParkingController {
 	public ResponseEntity<ParkingDetail> registerCar(@RequestBody ParkingDetail parkingdetail)
 			throws CarAlreadyExistException
 	{
-		System.out.println("welcome to The Parking System........");
 		parkingdetail = parkingService.registerCar(parkingdetail);
 		return new ResponseEntity<ParkingDetail>(parkingdetail, HttpStatus.CREATED);
 
@@ -40,7 +40,7 @@ public class ParkingController {
 	
 	//To Un-register the Car/Vehicle with calculating the total minutes of parking and cost of parking
 	@PostMapping("/unregistercar")
-	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail)	
+	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered	
 	{
 		String status = parkingService.unregisterCar(parkingdetail.getLicenceNumber());
 		return new ResponseEntity<String>(status, HttpStatus.CREATED);
@@ -60,7 +60,7 @@ public class ParkingController {
 	}	
 	
 	//To Get the List of Unregister Car list while Process Observation List.
-	@GetMapping("/listUnregisterCar")
+	@GetMapping("/UnregisterCarReport")
 	public ResponseEntity<List<UnRegisterCarReport>> getlistUnregisterCar()
 	{
 		return new ResponseEntity<>(parkingService.getlistUnregisterCar(), HttpStatus.OK);

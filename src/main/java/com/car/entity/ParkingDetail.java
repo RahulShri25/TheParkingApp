@@ -9,8 +9,6 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 
-
-@Data
 @Entity
 @Table(name="parking_detail")
 public class ParkingDetail {
