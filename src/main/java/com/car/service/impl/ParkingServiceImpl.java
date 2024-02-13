@@ -18,6 +18,7 @@ import com.car.config.Constant;
 import com.car.config.ParkingTimeCalculator;
 import com.car.entity.ParkingDetail;
 import com.car.entity.ParkingObservDetail;
+import com.car.entity.ParkingResponsedto;
 import com.car.entity.PriceDetail;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
@@ -26,6 +27,7 @@ import com.car.respository.ParkingCostRepository;
 import com.car.respository.ParkingObservationDetail;
 import com.car.respository.ParkingRepository;
 import com.car.service.ParkingService;
+
 
 @Service
 public class ParkingServiceImpl implements ParkingService {
@@ -63,7 +65,7 @@ public class ParkingServiceImpl implements ParkingService {
 	 * To Get The car Un-Register based on License Number
 	 */
 	@Override
-	public String unregisterCar(String licenceNumber) throws LicenceNotRegistered {
+	public ParkingResponsedto unregisterCar(String licenceNumber) throws LicenceNotRegistered {
 
 		Optional<ParkingDetail> pd = parkingRepo.findByLicenceNumberAndCurrentStatus(licenceNumber,
 				Constant.Car_Registered);
@@ -82,7 +84,7 @@ public class ParkingServiceImpl implements ParkingService {
 	 * To Calculate The Parking Cost Based on number of minutes of parking and
 	 * timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
 	 */
-	private String calculateParkingCost(ParkingDetail parkDetail, Map<String, BigDecimal> prices) {
+	private ParkingResponsedto calculateParkingCost(ParkingDetail parkDetail, Map<String, BigDecimal> prices) {
 
 		parkDetail.setCurrentStatus(Constant.Car_UnRegistered);
 		parkDetail.setDepartureTime(LocalDateTime.now().withNano(0));
@@ -92,10 +94,8 @@ public class ParkingServiceImpl implements ParkingService {
 				newDetail.getDepartureTime().toString());
 
 		var parkingAmount = prices.get(newDetail.getStreetName()).multiply(BigDecimal.valueOf(minutes));
-
-		String response = "You have successfully De-Registered your vehicle. Total Time : " + minutes + ""
-				+ " minute. And Total Amount " + parkingAmount.divide(BigDecimal.valueOf(100)) + "  in EUR.";
-		return response;
+		
+		return new ParkingResponsedto( "You have successfully De-Registered you vehicle.", parkingAmount.divide(BigDecimal.valueOf(100)), minutes);
 
 	}
 

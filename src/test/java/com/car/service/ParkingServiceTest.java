@@ -22,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.car.entity.ParkingDetail;
 import com.car.entity.ParkingObservDetail;
+import com.car.entity.ParkingResponsedto;
 import com.car.entity.PriceDetail;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
@@ -107,7 +108,7 @@ public class ParkingServiceTest {
 		Mockito.<Optional<ParkingDetail>>when(parkingRepo.findByLicenceNumberAndCurrentStatus(any(), any()))
 				.thenReturn(Optional.of(parkd));
 		when(parkingCostRepo.findAll()).thenReturn(priceDetail);
-		String result = parkingService.unregisterCar("abc102");
+		ParkingResponsedto result = parkingService.unregisterCar("abc102");
 		Assertions.assertEquals(result, "You have successfully De-Registered your vehicle");
 	}
 
@@ -126,7 +127,7 @@ public class ParkingServiceTest {
 		Mockito.<Optional<ParkingDetail>>when(parkingRepo.findByLicenceNumberAndCurrentStatus(any(), any()))
 				.thenReturn(Optional.of(parkd));
 		when(parkingCostRepo.findAll()).thenReturn(priceDetail);
-		String result = parkingService.unregisterCar("abc102");
+		ParkingResponsedto result = parkingService.unregisterCar("abc102");
 		Assertions.assertEquals(result, BigDecimal.valueOf(0));
 	}
 

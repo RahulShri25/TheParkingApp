@@ -1,5 +1,6 @@
 package com.car.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -20,6 +21,7 @@ public class ParkingDetail {
 	private LocalDateTime arrivalTime;
 	private LocalDateTime departureTime;
 	private String currentStatus;
+
 
 	public long getId() {
 		return id;

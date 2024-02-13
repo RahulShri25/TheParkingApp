@@ -53,8 +53,9 @@ Request
 
 RESPONSE: HTTP 200 (OK)
 {
-    "message": "You have successfully De-Registered your vehicle. Total Time : 2101 minute.And Total Cost : 315.15  in EUR."
-
+    "message": "You have successfully De-Registered you vehicle.",
+    "parkingAmount": 66.04,
+    "parkMinutes": 508
 }
 
 

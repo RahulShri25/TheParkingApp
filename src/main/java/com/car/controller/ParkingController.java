@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.car.entity.ParkingDetail;
 import com.car.entity.ParkingObservDetail;
+import com.car.entity.ParkingResponsedto;
 import com.car.entity.UnRegisterCarReport;
 import com.car.exception.CarAlreadyExistException;
 import com.car.exception.LicenceNotRegistered;
@@ -56,13 +57,10 @@ public class ParkingController {
 	 */
 
 	@PostMapping("/unregistercar")
-	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered {
-		String status = parkingService.unregisterCar(parkingdetail.getLicenceNumber());
-		return new ResponseEntity<String>(status, HttpStatus.CREATED);
+	public ResponseEntity<ParkingResponsedto> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered {
+		return new ResponseEntity<>(parkingService.unregisterCar(parkingdetail.getLicenceNumber()), HttpStatus.OK);
+
 	}
-	
-	
-	
 
 	/*
 	 * Load list of vehicle licence number collected during monitoring.
@@ -79,8 +77,6 @@ public class ParkingController {
 		return new ResponseEntity<List<ParkingObservDetail>>(entityList, HttpStatus.CREATED);
 
 	}
-	
-	
 	
 
 	// To Get the List of Unregister Car list while Process Observation List.
