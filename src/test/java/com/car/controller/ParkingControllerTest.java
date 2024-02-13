@@ -1,6 +1,5 @@
 package com.car.controller;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -10,10 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -26,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.car.config.Constant;
 import com.car.entity.ParkingDetail;
 import com.car.entity.ParkingObservDetail;
-import com.car.entity.ParkingObservdto;
 import com.car.entity.ParkingResponsedto;
 import com.car.entity.UnRegisterCarReport;
 import com.car.service.ParkingService;
@@ -42,6 +39,10 @@ public class ParkingControllerTest {
 	@MockBean
 	private ParkingService parkingService;
 
+	/**
+	 * RegisterCar Test Case 
+	 * @throws Exception
+	 */
 	@Test
 	void registerCarTest() throws Exception {
 
@@ -60,6 +61,10 @@ public class ParkingControllerTest {
 
 	}
 
+	/**
+	 * Un-Register Car Test Cases
+	 * @throws Exception
+	 */
 	@Test
 	void unRegisterCarTest() throws Exception {
 
@@ -86,6 +91,10 @@ public class ParkingControllerTest {
 
 	}
 
+	/**
+	 * Un-register Car Test Case for Sunday
+	 * @throws Exception
+	 */
 	@Test
 	void unRegisterCarOnSundayTest() throws Exception {
 
@@ -112,6 +121,10 @@ public class ParkingControllerTest {
 
 	}
 
+	/**
+	 * Un-Register Car for LicenseNumber Not Register Case
+	 * @throws Exception
+	 */
 	@Test
 	void unRegisterCarLicenceNotRegisteredTest() throws Exception {
 
@@ -138,6 +151,10 @@ public class ParkingControllerTest {
 
 	}
 
+	/**
+	 * Add Parking Observation Data Test Case
+	 * @throws Exception
+	 */
 	@Test
 	void addParkingObservationDetailTest() throws Exception {
 
@@ -163,6 +180,10 @@ public class ParkingControllerTest {
 				.andExpect(jsonPath("$", Matchers.hasSize(2)));
 	}
 
+	/**
+	 * Fine Report Test Cases for Unregister Car
+	 * @throws Exception
+	 */
 	@Test
 	void fineReportfoUnregisterCarTest() throws Exception {
 
@@ -180,6 +201,11 @@ public class ParkingControllerTest {
 				.andExpect(status().isOk()).andExpect(jsonPath("$", Matchers.hasSize(3)));
 	}
 
+	/**
+	 * Method to convert Object to Json
+	 * @param object
+	 * @return
+	 */
 	private String convertJsonString(Object object) {
 		try {
 			ObjectMapper op = new ObjectMapper();

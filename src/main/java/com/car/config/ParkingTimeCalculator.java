@@ -6,13 +6,21 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 
+ * @author rahul.shrivastava
+ *
+ */
 public class ParkingTimeCalculator {
 
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-	/*
-	 * To Calculate The Parking Cost Based on number of minutes of parking and
-	 * timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
+	
+	/**
+	 * To Calculate The Parking Cost Based on number of minutes of parking and timing constraints.
+	 *  Mon-Fri (08:00 to 21:00) and Excludes Sunday.
+	 * @param startDateTimeString
+	 * @param endDateTimeString
+	 * @return
 	 */
 	public static long calculateParkingMinutes(String startDateTimeString, String endDateTimeString) {
 

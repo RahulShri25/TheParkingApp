@@ -61,6 +61,8 @@ public class ParkingController {
 		return new ResponseEntity<>(parkingService.unregisterCar(parkingdetail.getLicenceNumber()), HttpStatus.OK);
 
 	}
+	
+	
 
 	/*
 	 * Load list of vehicle licence number collected during monitoring.
@@ -79,6 +81,8 @@ public class ParkingController {
 	}
 	
 
+	
+	
 	// To Get the List of Unregister Car list while Process Observation List.
 	@GetMapping("/UnregisterCarReport")
 	public ResponseEntity<List<UnRegisterCarReport>> getlistUnregisterCar() {

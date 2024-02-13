@@ -35,20 +35,22 @@ public class ParkingServiceImpl implements ParkingService {
 	@Autowired
 	private ParkingRepository parkingRepo;
 	private ParkingCostRepository parkingCostRepo;
-	private ParkingObservationDetail parkingobservRepo;
+	private ParkingObservationDetail parkingObservRepo;
 
 	public ParkingServiceImpl(ParkingRepository parkingRepo, ParkingCostRepository parkingCostRepo,
 			ParkingObservationDetail parkingobservRepo) {
 		super();
 		this.parkingRepo = parkingRepo;
 		this.parkingCostRepo = parkingCostRepo;
-		this.parkingobservRepo = parkingobservRepo;
+		this.parkingObservRepo = parkingObservRepo;
 
 	}
-
-	/*
+	
+	
+	/**
 	 * To Get The car Register based on License Number and Street Name
 	 */
+
 	@Override
 	public ParkingDetail registerCar(ParkingDetail parkingdetail) throws CarAlreadyExistException {
 		var alreadyRegistered = parkingRepo.findByLicenceNumber(parkingdetail.getLicenceNumber());
@@ -61,7 +63,8 @@ public class ParkingServiceImpl implements ParkingService {
 
 	}
 
-	/*
+	
+	/**
 	 * To Get The car Un-Register based on License Number
 	 */
 	@Override
@@ -80,9 +83,13 @@ public class ParkingServiceImpl implements ParkingService {
 		return this.calculateParkingCost(pd.get(), streetCost);
 	}
 
-	/*
-	 * To Calculate The Parking Cost Based on number of minutes of parking and
-	 * timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
+
+	/**
+	 * To Calculate The Parking Cost Based on number of minutes of parking and  timing constraints.
+	 *  Mon-Fri (08:00 to 21:00) and Excludes Sunday.
+	 * @param parkDetail
+	 * @param prices
+	 * @return ParkingResponsedto
 	 */
 	private ParkingResponsedto calculateParkingCost(ParkingDetail parkDetail, Map<String, BigDecimal> prices) {
 
@@ -99,18 +106,19 @@ public class ParkingServiceImpl implements ParkingService {
 
 	}
 
-	/*
+
+	/**
 	 * This is add Parking Monitoring list data into database
 	 */
 	@Override
 	public List<ParkingObservDetail> addParkingObservDetail(List<ParkingObservDetail> entityList) {
-		return parkingobservRepo.saveAll(entityList);
+		return parkingObservRepo.saveAll(entityList);
 	}
 
-	/*
-	 * this is to generate the Report of Un-registered car/vehicles
-	 */
 
+    /**
+     *  This is to generate the Report of Un-registered car/vehicles
+     */
 	@Override
 	public List<UnRegisterCarReport> getlistUnregisterCar() {
 
@@ -119,7 +127,7 @@ public class ParkingServiceImpl implements ParkingService {
 		var parkDetails = parkingRepo.findByArrivalTimeBetween(LocalDateTime.of(date, LocalTime.MIN),
 				LocalDateTime.of(date, LocalTime.MAX));
 		// All monitoring details of parked vehicle.
-		var observDetails = parkingobservRepo.findByRecordingDateBetween(LocalDateTime.of(date, LocalTime.MIN),
+		var observDetails = parkingObservRepo.findByRecordingDateBetween(LocalDateTime.of(date, LocalTime.MIN),
 				LocalDateTime.of(date, LocalTime.MAX));
 
 		List<ParkingObservDetail> finalData = new ArrayList<>();
