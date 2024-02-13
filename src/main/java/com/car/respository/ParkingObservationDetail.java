@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.car.entity.ParkingObservDetail;
 
 @Repository
-public interface ParkingObservationDetail extends JpaRepository<ParkingObservDetail,Long>{
-	List<ParkingObservDetail> findByRecordingDateBetween(LocalDateTime previousRecordingDate, LocalDateTime recordingDate);
+public interface ParkingObservationDetail extends JpaRepository<ParkingObservDetail, Long> {
+	List<ParkingObservDetail> findByRecordingDateBetween(LocalDateTime previousRecordingDate,
+			LocalDateTime recordingDate);
 }

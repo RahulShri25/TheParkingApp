@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.car.entity.ParkingDetail;
 
-public interface ParkingRepository extends JpaRepository<ParkingDetail, Long>{
+public interface ParkingRepository extends JpaRepository<ParkingDetail, Long> {
 
-	Optional<ParkingDetail>  findByLicenceNumber(String licenceNumber);
-	
+	Optional<ParkingDetail> findByLicenceNumber(String licenceNumber);
+
 	@Query("SELECT pd FROM ParkingDetail pd WHERE pd.licenceNumber = ?1 AND currentStatus = ?2")
 	Optional<ParkingDetail> findByLicenceNumberAndCurrentStatus(String licenceNumber, String parkingStatus);
-	
+
 	List<ParkingDetail> findByArrivalTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }

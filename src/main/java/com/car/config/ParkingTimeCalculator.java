@@ -7,13 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ParkingTimeCalculator {
-	
-	
+
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-	
-	
+
 	/*
-	 * To Calculate The Parking Cost Based on number of minutes of parking and timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
+	 * To Calculate The Parking Cost Based on number of minutes of parking and
+	 * timing constraints. Mon-fri (08:00 to 21:00) and Excludes Sunday.
 	 */
 	public static long calculateParkingMinutes(String startDateTimeString, String endDateTimeString) {
 
@@ -25,7 +24,6 @@ public class ParkingTimeCalculator {
 		while (startDateTime.isBefore(endDateTime)) {
 
 			// Check if the current date is not a Sunday
-
 			if (!startDateTime.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
 
 				LocalDateTime startOfDay = startDateTime.toLocalDate().atTime(8, 0);
@@ -33,7 +31,6 @@ public class ParkingTimeCalculator {
 				LocalDateTime endOfDay = startDateTime.toLocalDate().atTime(21, 0);
 
 				// Check if the time is between 08:00 and 21:00
-
 				if (startDateTime.isAfter(startOfDay) && startDateTime.isBefore(endOfDay)) {
 
 					minutes++;
@@ -51,22 +48,5 @@ public class ParkingTimeCalculator {
 		return minutes;
 
 	}
-
-	/*public static void main(String[] args) {
-
-		// Example input dates in the specified format
-
-		String startDateTimeString = "2024-02-10T14:30:50";
-
-		String endDateTimeString = "2024-02-12T14:30:50";
-
-		// Parse the input strings into LocalDateTime objects
-
-
-		long parkingMinutes = calculateParkingMinutes(startDateTimeString, endDateTimeString);
-
-		System.out.println("Total parking minutes: " + parkingMinutes);
-
-	}*/
 
 }

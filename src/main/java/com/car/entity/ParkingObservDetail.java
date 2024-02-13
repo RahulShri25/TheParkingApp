@@ -16,11 +16,10 @@ import jakarta.validation.constraints.Size;
 @Table(name = "parking_observation_detail")
 public class ParkingObservDetail {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@NotEmpty(message = "Licence number of the car is required")
 	@Size(min = 2, max = 10, message = "The length of licence number must be between 2 and 10 characters.")
 	@Column(name = "licence_number")
@@ -65,5 +64,4 @@ public class ParkingObservDetail {
 		this.recordingDate = recordingDate;
 	}
 
-	
 }

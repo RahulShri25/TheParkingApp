@@ -13,8 +13,6 @@ public class LicenceNotRegistered extends Exception {
 
 	public LicenceNotRegistered(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
-
 
 }

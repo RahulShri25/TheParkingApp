@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.car.entity.PriceDetail;
 
 @Repository
-public interface ParkingCostRepository extends JpaRepository<PriceDetail,Long>{	
+public interface ParkingCostRepository extends JpaRepository<PriceDetail, Long> {
 }

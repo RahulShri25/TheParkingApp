@@ -18,72 +18,76 @@ import com.car.exception.CarAlreadyExistException;
 import com.car.exception.LicenceNotRegistered;
 import com.car.service.ParkingService;
 
-
 @RestController
 @RequestMapping("/api")
 public class ParkingController {
 
 	@Autowired
 	private ParkingService parkingService;
-	
-	
-	/* To Register new Car/Vehicle using LicenceNumber Unique Value
-	 * @Requetparam  contains LicenceNumber, street_name,arrivalTime,currentStatus
+
+	/*
+	 * To Register new Car/Vehicle using LicenceNumber Unique Value
+	 * 
+	 * @Requetparam contains LicenceNumber, street_name,arrivalTime,currentStatus
+	 * 
 	 * @response parking details as response.
+	 * 
 	 * @throws AlreadyRegisteredException if user tried to re-register same vehicle.
 	 */
 	@PostMapping("/registercar")
 	public ResponseEntity<ParkingDetail> registerCar(@RequestBody ParkingDetail parkingdetail)
-			throws CarAlreadyExistException
-	{
+			throws CarAlreadyExistException {
 		parkingdetail = parkingService.registerCar(parkingdetail);
 		return new ResponseEntity<ParkingDetail>(parkingdetail, HttpStatus.CREATED);
 
 	}
 	
 	
+
 	/*
-	 * To Un-register the Car/Vehicle with calculating the total minutes of parking and cost of parking
+	 * To Un-register the Car/Vehicle with calculating the total minutes of parking
+	 * and cost of parking
 	 *
 	 * @Requetparam details contain LicenceNumber.
+	 * 
 	 * @response provide success message with Parking cost.
+	 * 
 	 * @throws LicenceNotRegistered if Licence not found.
 	 */
-	
+
 	@PostMapping("/unregistercar")
-	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered	
-	{
+	public ResponseEntity<String> unregisterCar(@RequestBody ParkingDetail parkingdetail) throws LicenceNotRegistered {
 		String status = parkingService.unregisterCar(parkingdetail.getLicenceNumber());
 		return new ResponseEntity<String>(status, HttpStatus.CREATED);
 	}
 	
 	
 	
+
 	/*
 	 * Load list of vehicle licence number collected during monitoring.
+	 * 
 	 * @response data list of all vehicles licence number along with street name.
+	 * 
 	 * @return return same as response.
 	 */
 	@PostMapping("/addParkingObservdetail")
-	public ResponseEntity<List<ParkingObservDetail>> addParkingObservDetail 
-	(@RequestBody List<ParkingObservDetail> entityList)
-	{
-		
+	public ResponseEntity<List<ParkingObservDetail>> addParkingObservDetail(
+			@RequestBody List<ParkingObservDetail> entityList) {
+
 		entityList = (List<ParkingObservDetail>) parkingService.addParkingObservDetail(entityList);
 		return new ResponseEntity<List<ParkingObservDetail>>(entityList, HttpStatus.CREATED);
-		
-		
-	}	
-	
-	//To Get the List of Unregister Car list while Process Observation List.
-	@GetMapping("/UnregisterCarReport")
-	public ResponseEntity<List<UnRegisterCarReport>> getlistUnregisterCar()
-	{
-		return new ResponseEntity<>(parkingService.getlistUnregisterCar(), HttpStatus.OK);
-		
-		
+
 	}
 	
 	
+	
+
+	// To Get the List of Unregister Car list while Process Observation List.
+	@GetMapping("/UnregisterCarReport")
+	public ResponseEntity<List<UnRegisterCarReport>> getlistUnregisterCar() {
+		return new ResponseEntity<>(parkingService.getlistUnregisterCar(), HttpStatus.OK);
+
+	}
 
 }

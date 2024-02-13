@@ -32,37 +32,33 @@ public class ParkingControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@MockBean
 	private ParkingService parkingService;
-	
+
 	@Test
 	void registerCarTest() throws Exception {
-		
+
 		ParkingDetail inputdata = new ParkingDetail();
 		inputdata.setLicenceNumber("abc109");
 		inputdata.setStreetName("Jakarta");
 		inputdata.setArrivalTime(LocalDateTime.now().withNano(0).minusMinutes(5));
 		inputdata.setDepartureTime(LocalDateTime.now().withNano(0));
 		inputdata.setCurrentStatus(Constant.Car_Registered);
-		
-		Optional<ParkingDetail> val =  Optional.of(inputdata);
-		
+
+		Optional<ParkingDetail> val = Optional.of(inputdata);
+
 		Mockito.when(parkingService.registerCar(ArgumentMatchers.any())).thenReturn(inputdata);
-		mockMvc.perform(post("/api/registercar").contentType(MediaType.APPLICATION_JSON)
-				.characterEncoding("utf-8")
-				.content(convertJsonString(inputdata))
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isCreated())
-		.andExpect(jsonPath("$.licenceNumber", Matchers.equalTo("abc109")))
-		.andExpect(jsonPath("$.streetName", Matchers.equalTo("Jakarta")));
-		
+		mockMvc.perform(post("/api/registercar").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+				.content(convertJsonString(inputdata)).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated()).andExpect(jsonPath("$.licenceNumber", Matchers.equalTo("abc109")))
+				.andExpect(jsonPath("$.streetName", Matchers.equalTo("Jakarta")));
+
 	}
-	
-	
+
 	@Test
 	void unRegisterCarTest() throws Exception {
-		
+
 		ParkingDetail inputdata = new ParkingDetail();
 		inputdata.setLicenceNumber("abc109");
 
@@ -73,49 +69,41 @@ public class ParkingControllerTest {
 		inputdata.setArrivalTime(LocalDateTime.now().withNano(0).minusMinutes(5));
 		inputdata.setDepartureTime(LocalDateTime.now().withNano(0));
 		Optional<ParkingDetail> op = Optional.of(val);
-				
+
 		Mockito.when(parkingService.registerCar(ArgumentMatchers.any())).thenReturn(inputdata);
-		mockMvc.perform(post("/api/unregistercar").contentType(MediaType.APPLICATION_JSON)
-				.characterEncoding("utf-8")
-				.content(convertJsonString(inputdata))
-				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.parkingAmount", Matchers.equalTo(BigDecimal.ZERO.intValue())));
-		
+		mockMvc.perform(post("/api/unregistercar").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+				.content(convertJsonString(inputdata)).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.parkingAmount", Matchers.equalTo(BigDecimal.ZERO.intValue())));
+
 	}
-	
-	
+
 	@Test
 	void addParkingObservationDetailTest() throws Exception {
-		
+
 		ParkingObservdto parkObvDto = new ParkingObservdto();
-		
+
 		ParkingObservDetail observ1 = new ParkingObservDetail();
 		observ1.setLicenceNumber("abc110");
 		observ1.setStreetName("Jakarta");
 		observ1.setRecordingDate(LocalDateTime.now().withNano(0));
-		
+
 		ParkingObservDetail observ2 = new ParkingObservDetail();
 		observ1.setLicenceNumber("abc111");
 		observ1.setStreetName("Java");
 		observ1.setRecordingDate(LocalDateTime.now().withNano(0));
-		
-		parkObvDto.setParkingObservDetail(List.of(observ1,observ2));
-		
-		Mockito.when(parkingService.addParkingObservDetail(ArgumentMatchers.any())).thenReturn(List.of(observ1,observ2));
+
+		parkObvDto.setParkingObservDetail(List.of(observ1, observ2));
+
+		Mockito.when(parkingService.addParkingObservDetail(ArgumentMatchers.any()))
+				.thenReturn(List.of(observ1, observ2));
 		mockMvc.perform(post("/api/addParkingObservdetail").contentType(MediaType.APPLICATION_JSON)
-				.characterEncoding("utf-8")
-				.content(convertJsonString(parkObvDto))
-				.accept(MediaType.APPLICATION_JSON))
-		.andDo(print())
-		.andExpect(status().isCreated())
-		.andExpect(jsonPath("$[0].licenceNumber", Matchers.equalTo("abc109")))
-		.andExpect(jsonPath("$[1].licenceNumber", Matchers.equalTo("abc109")))
-		.andExpect(jsonPath("$", Matchers.hasSize(3)));
+				.characterEncoding("utf-8").content(convertJsonString(parkObvDto)).accept(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isCreated())
+				.andExpect(jsonPath("$[0].licenceNumber", Matchers.equalTo("abc109")))
+				.andExpect(jsonPath("$[1].licenceNumber", Matchers.equalTo("abc109")))
+				.andExpect(jsonPath("$", Matchers.hasSize(3)));
 	}
-	
-	
-	
+
 	private String convertJsonString(Object object) {
 		try {
 			ObjectMapper op = new ObjectMapper();
