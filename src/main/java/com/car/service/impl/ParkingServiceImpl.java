@@ -38,7 +38,7 @@ public class ParkingServiceImpl implements ParkingService {
 	private ParkingObservationDetail parkingObservRepo;
 
 	public ParkingServiceImpl(ParkingRepository parkingRepo, ParkingCostRepository parkingCostRepo,
-			ParkingObservationDetail parkingobservRepo) {
+			ParkingObservationDetail parkingobservRepo, ParkingObservationDetail parkingObservRepo) {
 		super();
 		this.parkingRepo = parkingRepo;
 		this.parkingCostRepo = parkingCostRepo;
